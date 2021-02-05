@@ -215,7 +215,8 @@ class Amadeus private constructor(
                     String::class.java,
                     Any::class.java
                 )
-                val resultAsMap = moshi.adapter<MutableMap<String, Any>>(mapType).fromJson(it) ?: mutableMapOf()
+                val resultAsMap =
+                    moshi.adapter<MutableMap<String, Any>>(mapType).fromJson(it) ?: mutableMapOf()
                 resultAsMap["method"] = success.method ?: ""
 
                 try {
@@ -255,8 +256,8 @@ class Amadeus private constructor(
         }
 
         enum class Hosts(val value: String) {
-            TEST("https://test.api.amadeus.com/"),
-            PRODUCTION("https://api.amadeus.com/")
+            TEST("https://test.travel.api.amadeus.com/"),
+            PRODUCTION("https://travel.api.amadeus.com/")
         }
 
         enum class LogLevel(val value: HttpLoggingInterceptor.Level) {
