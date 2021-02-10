@@ -30,6 +30,7 @@ class Amadeus private constructor(
     private val baseUrl: String,
     private val clientId: String,
     private val clientSecret: String,
+    private val uuid: String?,
     private val logLevel: HttpLoggingInterceptor.Level,
     private val customAppId: String?,
     private val customAppVersion: String?,
@@ -40,7 +41,7 @@ class Amadeus private constructor(
         .connectTimeout(1, TimeUnit.MINUTES)
         .writeTimeout(1, TimeUnit.MINUTES)
         .readTimeout(1, TimeUnit.MINUTES)
-        .addInterceptor(AmadeusHeadersInterceptor(customAppId, customAppVersion))
+        .addInterceptor(AmadeusHeadersInterceptor(customAppId, customAppVersion, uuid))
         .addInterceptor(HttpLoggingInterceptor().apply { level = logLevel })
         .addInterceptor(AccessTokenInterceptor(this))
         .authenticator(AccessTokenAuthenticator(this))
@@ -114,7 +115,7 @@ class Amadeus private constructor(
         media = Media(baseUrl, client, moshi, dispatcher)
 
         val okHttpClientBuilder = OkHttpClient.Builder()
-            .addInterceptor(AmadeusHeadersInterceptor(customAppId, customAppVersion))
+            .addInterceptor(AmadeusHeadersInterceptor(customAppId, customAppVersion, uuid))
             .addInterceptor(HttpLoggingInterceptor().apply { level = logLevel })
 
         service = Retrofit.Builder()
@@ -237,6 +238,7 @@ class Amadeus private constructor(
         private var hostName: String = Hosts.TEST.value
         private lateinit var clientId: String
         private lateinit var clientSecret: String
+        private var uuid: String? = null
         private var logLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE
         private var customAppId: String? = null
         private var customAppVersion: String? = null
@@ -319,6 +321,8 @@ class Amadeus private constructor(
             BODY(HttpLoggingInterceptor.Level.BODY)
         }
 
+        fun setUUID(uuid: String) = apply { this.uuid = uuid }
+
         /**
          * Set client default host name.
          * Default Hosts.TEST.
@@ -356,6 +360,7 @@ class Amadeus private constructor(
             hostName,
             clientId,
             clientSecret,
+            uuid,
             logLevel,
             customAppId,
             customAppVersion,

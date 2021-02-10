@@ -123,6 +123,7 @@ data class FlightOfferSearch internal constructor(
     @JsonClass(generateAdapter = true)
     data class IncludedCheckedBags internal constructor(
         val weight: Int = 0,
-        val weightUnit: String? = null
+        val weightUnit: String? = null,
+        val quantity: Int = 0
     ) : Parcelable
 }
