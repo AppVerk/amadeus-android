@@ -3,7 +3,6 @@ package com.amadeus.android.integration
 import com.amadeus.android.Amadeus
 import com.amadeus.android.ApiResult
 import com.amadeus.android.ApiResult.Success
-import com.amadeus.android.BuildConfig
 import com.amadeus.android.domain.resources.AirTraffic
 import com.amadeus.android.domain.resources.Traveler
 import com.amadeus.android.domain.resources.Traveler.*
@@ -18,6 +17,8 @@ import org.junit.BeforeClass
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Suppress("BlockingMethodInNonBlockingContext")
@@ -33,8 +34,8 @@ class AmadeusTest {
         fun before() {
             amadeus = Amadeus.Builder()
                 .setHostName(Amadeus.Builder.Hosts.TEST)
-                .setClientId(BuildConfig.AMADEUS_CLIENT_ID)
-                .setClientSecret(BuildConfig.AMADEUS_CLIENT_SECRET)
+                .setClientId("nreavGVHHYpk3agaAuGEfqJ7AidGpATI")
+                .setClientSecret("vekGoZIA3036lcqT")
                 .setLogLevel(Amadeus.Builder.LogLevel.BODY)
                 .build()
 
@@ -345,16 +346,25 @@ class AmadeusTest {
     @Test
     fun `Quote Flight Offer with object`() = runBlocking {
         val result = amadeus.shopping.flightOffersSearch.get(
-            originLocationCode = "MAD",
-            destinationLocationCode = "MUC",
-            departureDate = "2020-10-22",
+            originLocationCode = "GIG",
+            destinationLocationCode = "MAD",
+            departureDate = SimpleDateFormat("yyyy-MM-dd").format(Date()),
             adults = 1,
             max = 2
         )
         assert(result.succeeded)
         if (result is Success) {
             val flightOfferSearches = result.data
-            assert(amadeus.shopping.flightOffersSearch.pricing.post(flightOfferSearches).succeeded)
+            val pricing = amadeus.shopping.flightOffersSearch.pricing.post(
+                flightOfferSearches,
+                include = listOf(
+                    "bags",
+                    "credit-card-fees",
+                    "other-services",
+                    "detailed-fare-rules"
+                )
+            )
+            assert(pricing.succeeded)
         }
     }
 
