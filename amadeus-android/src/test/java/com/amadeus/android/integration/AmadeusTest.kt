@@ -3,6 +3,7 @@ package com.amadeus.android.integration
 import com.amadeus.android.Amadeus
 import com.amadeus.android.ApiResult
 import com.amadeus.android.ApiResult.Success
+import com.amadeus.android.BuildConfig
 import com.amadeus.android.domain.resources.AirTraffic
 import com.amadeus.android.domain.resources.Traveler
 import com.amadeus.android.domain.resources.Traveler.*
@@ -34,8 +35,8 @@ class AmadeusTest {
         fun before() {
             amadeus = Amadeus.Builder()
                 .setHostName(Amadeus.Builder.Hosts.TEST)
-                .setClientId("nreavGVHHYpk3agaAuGEfqJ7AidGpATI")
-                .setClientSecret("vekGoZIA3036lcqT")
+                .setClientId(BuildConfig.AMADEUS_CLIENT_ID)
+                .setClientSecret(BuildConfig.AMADEUS_CLIENT_SECRET)
                 .setLogLevel(Amadeus.Builder.LogLevel.BODY)
                 .build()
 
