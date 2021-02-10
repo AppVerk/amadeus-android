@@ -321,7 +321,7 @@ class Amadeus private constructor(
             BODY(HttpLoggingInterceptor.Level.BODY)
         }
 
-        fun setUUID(uuid: String) = apply { this.uuid = uuid }
+        fun setUUID(uuid: String?) = apply { this.uuid = uuid }
 
         /**
          * Set client default host name.
