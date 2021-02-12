@@ -347,9 +347,10 @@ class AmadeusTest {
     @Test
     fun `Quote Flight Offer with object`() = runBlocking {
         val result = amadeus.shopping.flightOffersSearch.get(
-            originLocationCode = "GIG",
-            destinationLocationCode = "MAD",
+            originLocationCode = "AMS",
+            destinationLocationCode = "BER",
             departureDate = SimpleDateFormat("yyyy-MM-dd").format(Date()),
+            returnDate = "2021-02-14",
             adults = 1,
             max = 2
         )
