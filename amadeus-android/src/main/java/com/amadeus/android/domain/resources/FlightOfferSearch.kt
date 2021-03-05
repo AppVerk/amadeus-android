@@ -131,13 +131,13 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class FareDetailsAdditionalServices internal constructor(
+    data class FareDetailsAdditionalServices constructor(
         var chargeableCheckedBags: ChargeableCheckedBags
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class ChargeableCheckedBags internal constructor(
+    data class ChargeableCheckedBags constructor(
         var quantity: Int = 0
     ) : Parcelable
 
