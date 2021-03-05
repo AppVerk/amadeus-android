@@ -126,13 +126,13 @@ data class FlightOfferSearch internal constructor(
         val fareBasis: String? = null,
         @Json(name = "class") @field:Json(name = "class") val segmentClass: String? = null,
         val includedCheckedBags: IncludedCheckedBags? = null,
-        val additionalServices: FareDetailsAdditionalServices? = null
+        var additionalServices: FareDetailsAdditionalServices? = null
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
     data class FareDetailsAdditionalServices internal constructor(
-        val chargeableCheckedBags: ChargeableCheckedBags
+        var chargeableCheckedBags: ChargeableCheckedBags
     ) : Parcelable
 
     @Parcelize
