@@ -20,6 +20,7 @@ sealed class ApiResult<out R> {
         val data: T,
         val meta: Meta? = null,
         val dictionaries: Map<String, Any>? = null,
+        val warnings: Map<String, Any>? = null,
         val included: Map<String, Any>? = null
     ) : ApiResult<T>() {
 
@@ -35,6 +36,8 @@ sealed class ApiResult<out R> {
         fun hasSelf() = hasMeta(Amadeus.SELF)
 
         fun hasPrevious() = hasMeta(Amadeus.PREVIOUS)
+
+        fun hasWarnings() = warnings != null
 
         private fun hasMeta(key: String) = meta?.links?.get(key) != null
     }
