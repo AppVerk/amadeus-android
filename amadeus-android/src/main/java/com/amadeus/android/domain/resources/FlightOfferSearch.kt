@@ -78,7 +78,7 @@ data class FlightOfferSearch internal constructor(
         val total: Double = 0.0,
         val base: Double = 0.0,
         val fees: List<Fee>? = null,
-        val grandTotal: Double = 0.0,
+        var grandTotal: Double = 0.0,
         val billingCurrency: String? = null,
         val taxes: List<Tax>? = null
     ) : Parcelable
