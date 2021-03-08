@@ -102,10 +102,7 @@ data class FlightOfferSearch internal constructor(
     data class PricingOptions internal constructor(
         val includedCheckedBagsOnly: Boolean = false,
         val fareType: List<String>? = null,
-        val corporateCodes: List<String>? = null,
-        val refundableFare: Boolean = false,
-        val noRestrictionFare: Boolean = false,
-        val noPenaltyFare: Boolean = false
+        val corporateCodes: List<String>? = null
     ) : Parcelable
 
     @Parcelize
@@ -123,6 +120,7 @@ data class FlightOfferSearch internal constructor(
     data class FareDetailsBySegment internal constructor(
         val segmentId: String? = null,
         val cabin: String? = null,
+        val brandedFare: String? = null,
         val fareBasis: String? = null,
         @Json(name = "class") @field:Json(name = "class") val segmentClass: String? = null,
         val includedCheckedBags: IncludedCheckedBags? = null,
