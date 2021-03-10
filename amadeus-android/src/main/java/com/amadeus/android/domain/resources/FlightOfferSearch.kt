@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class FlightOfferSearch internal constructor(
+data class FlightOfferSearch(
     val type: String? = null,
     val id: String? = null,
     val source: String? = null,
@@ -29,14 +29,14 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Itinerary internal constructor(
+    data class Itinerary(
         val duration: String? = null,
         val segments: List<SearchSegment>? = null
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class SearchSegment internal constructor(
+    data class SearchSegment(
         val departure: AirportInfo? = null,
         val arrival: AirportInfo? = null,
         val carrierCode: String? = null,
@@ -51,7 +51,7 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Co2Emissions internal constructor(
+    data class Co2Emissions(
         val weight: Int = 0,
         val weightUnit: String? = null,
         val cabin: String? = null
@@ -59,7 +59,7 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class AirportInfo internal constructor(
+    data class AirportInfo(
         val iataCode: String? = null,
         val terminal: String? = null,
         val at: String? = null
@@ -67,13 +67,13 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Aircraft internal constructor(
+    data class Aircraft(
         val code: String? = null
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class SearchPrice internal constructor(
+    data class SearchPrice(
         val currency: String? = null,
         val total: Double = 0.0,
         val base: Double = 0.0,
@@ -85,21 +85,21 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Fee internal constructor(
+    data class Fee(
         val amount: Double = 0.0,
         val type: String? = null
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class Tax internal constructor(
+    data class Tax(
         val amount: Double = 0.0,
         val code: String? = null
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class PricingOptions internal constructor(
+    data class PricingOptions(
         val includedCheckedBagsOnly: Boolean = false,
         val fareType: List<String>? = null,
         val corporateCodes: List<String>? = null
@@ -107,7 +107,7 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class TravelerPricing internal constructor(
+    data class TravelerPricing(
         val travelerId: String? = null,
         val fareOption: String? = null,
         val travelerType: String? = null,
@@ -117,7 +117,7 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class FareDetailsBySegment internal constructor(
+    data class FareDetailsBySegment(
         val segmentId: String? = null,
         val cabin: String? = null,
         val brandedFare: String? = null,
@@ -129,19 +129,19 @@ data class FlightOfferSearch internal constructor(
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class FareDetailsAdditionalServices constructor(
+    data class FareDetailsAdditionalServices(
         var chargeableCheckedBags: ChargeableCheckedBags
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class ChargeableCheckedBags constructor(
+    data class ChargeableCheckedBags(
         var quantity: Int = 0
     ) : Parcelable
 
     @Parcelize
     @JsonClass(generateAdapter = true)
-    data class IncludedCheckedBags internal constructor(
+    data class IncludedCheckedBags(
         val weight: Int = 0,
         val weightUnit: String? = null,
         val quantity: Int = 0
