@@ -75,12 +75,12 @@ data class FlightOfferSearch(
     @JsonClass(generateAdapter = true)
     data class SearchPrice(
         val currency: String? = null,
-        val total: Double = 0.0,
+        var total: Double = 0.0,
         val base: Double = 0.0,
-        val fees: List<Fee>? = null,
+        var fees: List<Fee>? = null,
         var grandTotal: Double? = null,
         val billingCurrency: String? = null,
-        val taxes: List<Tax>? = null
+        var taxes: List<Tax>? = null
     ) : Parcelable
 
     @Parcelize
