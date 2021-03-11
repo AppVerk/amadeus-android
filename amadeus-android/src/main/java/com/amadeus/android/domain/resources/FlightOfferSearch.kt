@@ -21,7 +21,7 @@ data class FlightOfferSearch(
     val lastTicketingDate: String? = null,
     val numberOfBookableSeats: Int = 0,
     val itineraries: List<Itinerary>? = null,
-    val price: SearchPrice? = null,
+    var price: SearchPrice? = null,
     val pricingOptions: PricingOptions? = null,
     val validatingAirlineCodes: List<String>? = null,
     val travelerPricings: List<TravelerPricing>? = null
