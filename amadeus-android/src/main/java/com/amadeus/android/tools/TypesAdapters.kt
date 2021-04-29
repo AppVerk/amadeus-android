@@ -9,13 +9,15 @@ import java.io.IOException
 import java.lang.reflect.Type
 import java.math.BigDecimal
 
+
 /**
  * Moshi Factory to handle all the custom types we want to support,
  * such as [BigDecimal].
  */
 class TypesAdapterFactory : JsonAdapter.Factory {
     private val types = mapOf<Type, JsonAdapter<*>>(
-        BigDecimal::class.java to BigDecimalJsonAdapter()
+        BigDecimal::class.java to BigDecimalJsonAdapter(),
+        Exception::class.java to ExceptionJsonAdapter()
     )
 
     override fun create(
@@ -51,11 +53,26 @@ internal abstract class XNullableJsonAdapter<T> : JsonAdapter<T>() {
     }
 }
 
+
 internal class BigDecimalJsonAdapter : XNullableJsonAdapter<BigDecimal>() {
     override fun fromNonNullString(nextString: String) = BigDecimal(nextString)
 
     override fun toJson(writer: JsonWriter, value: BigDecimal?) {
         value?.let { writer.value(it) }
+    }
+}
+
+internal class ExceptionJsonAdapter : XNullableJsonAdapter<Exception>() {
+
+    override fun toJson(writer: JsonWriter, value: Exception?) {
+        value?.let {
+            val message = value.message
+            writer.value(message)
+        }
+    }
+
+    override fun fromNonNullString(nextString: String): Exception {
+        return Exception(nextString)
     }
 }
 
